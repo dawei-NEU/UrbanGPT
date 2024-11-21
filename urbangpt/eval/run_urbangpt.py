@@ -117,7 +117,7 @@ def run_eval(args, num_gpus):
 
 
 @ray.remote(num_gpus=1)
-@torch.inference_mode()
+@torch.inference_mode() #推理模式下会禁用梯度计算，提高速度减少内存，适用于模型的评估即不需要反向传播的场景
 def eval_model(args, prompt_file, start_idx, end_idx):
     # load prompting file
     # prompt_file = load_prompting_file(args.prompting_file)

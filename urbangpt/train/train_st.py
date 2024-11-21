@@ -669,6 +669,7 @@ def train():
             model.get_input_embeddings().register_forward_hook(make_inputs_require_grad)
             print('require_grads: output')
 
+    # 采用lora方式进行大模型微调，得到微调用的model
     if training_args.lora_enable:
         print('lora_enable:', training_args.lora_enable)
         from peft import LoraConfig, get_peft_model
@@ -715,7 +716,7 @@ def train():
         conversation_lib.default_conversation = conversation_lib.conv_templates["vicuna_v1_1"]
 
     if model_args.st_tower is not None:
-        model_st_dict = model.get_model().initialize_st_modules(
+        model_st_dict = model.get_model().initialize_st_modules( # 初始化st_encoder
             st_tower=model_args.st_tower,
             st_select_layer=model_args.st_select_layer,
             pretrain_st_mlp_adapter=model_args.pretrain_st_mlp_adapter,

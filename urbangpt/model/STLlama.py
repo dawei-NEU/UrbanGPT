@@ -284,7 +284,7 @@ class STLlamaModel(LlamaModel):
             return_dict=return_dict
         )
 
-
+# 这个类是继承的llama模型类，同时里面的st_tower也包含了作者自定义的st_encoder类
 class STLlamaForCausalLM(LlamaForCausalLM):
     config_class = STLlamaConfig
 
